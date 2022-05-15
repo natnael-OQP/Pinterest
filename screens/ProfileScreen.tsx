@@ -17,12 +17,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 10,
     },
-    pin: {
-        width: '100%',
-    },
-    image: {
-        borderRadius: 25,
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
