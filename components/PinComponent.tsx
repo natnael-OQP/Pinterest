@@ -66,8 +66,10 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     title: {
-        fontSize: 17,
+        fontSize: 16,
+        lineHeight: 20,
         fontWeight: '500',
         margin: 10,
+        color: '#181818',
     },
 })
