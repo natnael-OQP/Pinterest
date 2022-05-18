@@ -1,10 +1,11 @@
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, useWindowDimensions } from 'react-native'
 import PinComponent from '../components/PinComponent'
 
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
 import Pins from '../assets/data/pins'
 import MasonryList from '@react-native-seoul/masonry-list'
+import { useEffect, useState } from 'react'
 
 interface Props {
     item: {
@@ -15,12 +16,17 @@ interface Props {
 }
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
+    const { width } = useWindowDimensions()
+    const [numberOfColumns, setNumberOfColumns] = useState<number>()
+
+    useEffect(() => setNumberOfColumns(Math.ceil(width / 250)), [width])
+
     return (
         <View style={styles.container}>
             <MasonryList
                 style={{ width: '100%' }}
                 data={Pins}
-                numColumns={2}
+                numColumns={numberOfColumns}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => <PinComponent {...item} />}
                 showsVerticalScrollIndicator={false}

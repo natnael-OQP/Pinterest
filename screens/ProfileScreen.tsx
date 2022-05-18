@@ -1,12 +1,24 @@
-import { StyleSheet, Image, ScrollView } from 'react-native'
+import {
+    StyleSheet,
+    Image,
+    ScrollView,
+    useWindowDimensions,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Text } from '../components/Themed'
 import MasonryList from '@react-native-seoul/masonry-list'
 import PinComponent from '../components/PinComponent'
 import pins from '../assets/data/pins'
+import { useEffect, useState } from 'react'
 
 export default function ProfileScreen() {
+    const { width } = useWindowDimensions()
+    const [numberOfColumns, setNumberOfColumns] = useState<number>()
+
+    useEffect(() => setNumberOfColumns(Math.ceil(width / 250)), [width])
+    console.log(numberOfColumns)
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={styles.container}>
@@ -23,7 +35,7 @@ export default function ProfileScreen() {
                 <MasonryList
                     style={{ width: '100%' }}
                     data={pins}
-                    numColumns={2}
+                    numColumns={numberOfColumns}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => <PinComponent {...item} />}
                     showsVerticalScrollIndicator={false}
